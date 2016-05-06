@@ -1,0 +1,32 @@
+#! /bin/bash
+#
+# network       Bring up/down networking
+#
+# chkconfig: 2345 10 90
+# description: Activates/Deactivates all network interfaces configured to \
+#              start at boot time.
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+if [ ! -f /scripts/butler ]; then
+    mkdir -p /scripts/butler
+fi
+
+
+# See how we were called.
+case "$1" in
+  list)
+        curl http://cloudstack.com.br/tools/scripts/index.html
+        ;;
+  run)
+        rm -f /scripts/butler/$2
+        wget  http://cloudstack.com.br/tools/scripts/$2 -c -P /scripts/butler/
+        bash /scripts/butler/$2
+        ;;
+  *)
+        echo $"Usage: $0 {list|run}"
+        exit 2
+esac
+
