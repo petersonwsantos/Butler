@@ -1,0 +1,6 @@
+#! /bin/bash
+#
+yum install curl wget -y 
+rm -f  /sbin/butler
+wget -c http://cloudstack.com.br/butler -P /sbin/
+chmod 700 /sbin/butler
