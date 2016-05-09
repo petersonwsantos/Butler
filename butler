@@ -22,7 +22,7 @@ case "$1" in
         ;;
   run)
         rm -f /scripts/butler/$2
-        wget  http://cloudstack.com.br/tools/scripts/$2 -c -P /scripts/butler/
+        wget https://raw.githubusercontent.com/petersonwsantos/Butler/master/scripts/$2 -c -P /scripts/butler/
         bash /scripts/butler/$2
         ;;
   *)
