@@ -2,5 +2,5 @@
 #
 yum install curl wget -y 
 rm -f  /sbin/butler
-wget -c https://raw.githubusercontent.com/petersonwsantos/Butler/master/butler -P /sbin/
+wget -c --no-check-certificate https://raw.githubusercontent.com/petersonwsantos/Butler/master/butler -P /sbin/
 chmod 700 /sbin/butler
