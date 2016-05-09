@@ -18,7 +18,7 @@ fi
 # See how we were called.
 case "$1" in
   list)
-        curl http://cloudstack.com.br/tools/scripts/index.html
+        lynx -dump  -accept_all_cookies  https://github.com/petersonwsantos/Butler/tree/master/scripts | grep "https://github.com/petersonwsantos/Butler/blob/master/scripts/" | cut -d / -f 9
         ;;
   run)
         rm -f /scripts/butler/$2
