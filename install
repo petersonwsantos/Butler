@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-yum install curl wget -y 
+yum install curl wget lynx -y 
 rm -f  /sbin/butler
 wget -c --no-check-certificate https://raw.githubusercontent.com/petersonwsantos/Butler/master/butler -P /sbin/
 chmod 700 /sbin/butler
