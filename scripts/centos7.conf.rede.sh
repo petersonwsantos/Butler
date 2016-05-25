@@ -71,11 +71,11 @@ echo "nameserver $DNS1" > /etc/resolv.conf
 echo "nameserver $DNS2" >> /etc/resolv.conf
 
 cp /etc/sysctl.conf /etc/sysctl.`date +%Y-%m-%d-%H-%M` 
-sed -i "s/net.ipv6.conf.all.disable_ipv6/#net.ipv6.conf.all.disable_ipv6/"  /etc/sysctl.conf   
-sed -i "s/net.ipv6.conf.default.disable_ipv6/#net.ipv6.conf.default.disable_ipv6/"  /etc/sysctl.conf 
+sed -i "s/net.ipv6.conf/#net.ipv6.conf/"  /etc/sysctl.conf   
 echo "net.ipv6.conf.sed-PLACA.disable_ipv6 = 1" >>   /etc/sysctl.conf
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >>   /etc/sysctl.conf 
 echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf 
+echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf 
 
 sed -i "s/sed-PLACA/$PLACA/"  /etc/sysctl.conf 
 
