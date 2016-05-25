@@ -76,9 +76,9 @@ sed -i "s/net.ipv6.conf.default.disable_ipv6/#net.ipv6.conf.default.disable_ipv6
 echo "net.ipv6.conf.sed-PLACA.disable_ipv6 = 1" >>   /etc/sysctl.conf
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >>   /etc/sysctl.conf 
 echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf 
+
 sed -i "s/sed-PLACA/$PLACA/"  /etc/sysctl.conf 
 
-sed -i "s/sed-PLACA/$PLACA/"   /etc/sysconfig/network-scripts/
 sysctl -p 
 
 cat <<'EOF' > /etc/sysconfig/network-scripts/ifcfg-$PLACA
