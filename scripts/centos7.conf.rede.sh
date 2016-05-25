@@ -71,8 +71,8 @@ echo "nameserver $DNS1" > /etc/resolv.conf
 echo "nameserver $DNS2" >> /etc/resolv.conf
 
 cat <<'EOF' >  /etc/sysctl.d/50-sysctl.conf
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.all.disable_ipv6 = 0
+net.ipv6.conf.default.disable_ipv6 = 0
 EOF
 
 sysctl -p 
