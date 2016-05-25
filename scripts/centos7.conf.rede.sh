@@ -70,11 +70,11 @@ echo $HOST.$DOMINIO  > /etc/hostname
 echo "nameserver $DNS1" > /etc/resolv.conf
 echo "nameserver $DNS2" >> /etc/resolv.conf
 
-cat <<'EOF' >  /etc/sysctl.d/50-sysctl.conf
-net.ipv6.conf.all.disable_ipv6 = 0
-net.ipv6.conf.default.disable_ipv6 = 0
-EOF
-
+cp /etc/sysctl.conf /etc/sysctl.`date +%Y-%m-%d-%H-%M` 
+sed -i "s/net.ipv6.conf.all.disable_ipv6/#net.ipv6.conf.all.disable_ipv6/"  /etc/sysctl.conf   
+sed -i "s/net.ipv6.conf.default.disable_ipv6/#net.ipv6.conf.default.disable_ipv6/"  /etc/sysctl.conf 
+echo "net.ipv6.conf.all.disable_ipv6 = 0" >>   /etc/sysctl.conf 
+echo "net.ipv6.conf.default.disable_ipv6 = 0" >> /etc/sysctl.conf 
 sysctl -p 
 
 cat <<'EOF' > /etc/sysconfig/network-scripts/ifcfg-$PLACA
