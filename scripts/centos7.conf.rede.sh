@@ -70,6 +70,13 @@ echo $HOST.$DOMINIO  > /etc/hostname
 echo "nameserver $DNS1" > /etc/resolv.conf
 echo "nameserver $DNS2" >> /etc/resolv.conf
 
+cat <<'EOF' >  /etc/sysctl.d/50-sysctl.conf
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+EOF
+
+sysctl -p 
+
 cat <<'EOF' > /etc/sysconfig/network-scripts/ifcfg-$PLACA
 TYPE=Ethernet
 IPADDR=sed-IP
@@ -85,6 +92,12 @@ IPV4_FAILURE_FATAL=no
 NAME=sed-PLACA
 DEVICE=sed-PLACA
 ONBOOT=yes
+IPV6INIT=no
+IPV6_AUTOCONF=no
+IPV6_DEFROUTE=no
+IPV6_PEERDNS=no
+IPV6_PEERROUTES=no
+IPV6_FAILURE_FATAL=no
 EOF
 
 
@@ -95,3 +108,5 @@ sed -i "s/sed-DNS1/$DNS1/"      /etc/sysconfig/network-scripts/ifcfg-$PLACA
 sed -i "s/sed-DNS2/$DNS2/"     /etc/sysconfig/network-scripts/ifcfg-$PLACA
 sed -i "s/sed-PLACA/$PLACA/"   /etc/sysconfig/network-scripts/ifcfg-$PLACA
 sed -i "s/sed-PLACA/$PLACA/" /etc/sysconfig/network-scripts/ifcfg-$PLACA
+
+
