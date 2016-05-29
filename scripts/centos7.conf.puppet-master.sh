@@ -3,6 +3,8 @@ rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum update
 yum install puppetserver -y
 
+sed -i "s/`hostname -s`$/master puppet/g" /etc/hosts
+
 # limpa entradas anteriores
 sed -i "s/\[agent/#\[agent/"  /etc/puppetlabs/puppet/puppet.conf
 sed -i "s/certname/#certname/"  /etc/puppetlabs/puppet/puppet.conf
