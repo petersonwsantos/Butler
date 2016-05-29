@@ -4,7 +4,7 @@ yum update
 yum install puppetserver -y
 
 # limpa entradas anteriores
-sed -i "s/[agent/#[agent/"  /etc/puppetlabs/puppet/puppet.conf
+sed -i "s/\[agent/#\[agent/"  /etc/puppetlabs/puppet/puppet.conf
 sed -i "s/certname/#certname/"  /etc/puppetlabs/puppet/puppet.conf
 
 
