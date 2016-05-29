@@ -3,7 +3,8 @@ rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum update
 yum install puppetserver -y
 
-
+echo "export PATH=/opt/puppetlabs/bin:$PATH" > /etc/profile.d/puppet_path.sh
+source /etc/profile.d/puppet_path.sh
 
 sed -i "s/`hostname -s`$/master puppet/g" /etc/hosts
 
