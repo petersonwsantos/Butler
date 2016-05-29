@@ -3,6 +3,8 @@ rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum update
 yum install puppetserver -y
 
+
+
 sed -i "s/`hostname -s`$/master puppet/g" /etc/hosts
 
 # limpa entradas anteriores
@@ -21,7 +23,7 @@ echo "Gerar certificados"
 echo " "
 echo " "
 echo "Digite:  "
-echo "puppet cert generate  --dns_alt_names=puppet"
 echo "puppet cert list -a"
+echo "puppet cert generate `hostname -f`  --dns_alt_names=puppet"
 echo "puppet cert sign -all"
 echo "systemctl restart puppetserver"
