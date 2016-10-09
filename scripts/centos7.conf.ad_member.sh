@@ -34,8 +34,11 @@ read var_sudoers_group_admin
 var_domain_upper=` echo $var_domain | tr '[:lower:]' '[:upper:]' `
 var_netbios_upper=` echo $var_netbios | tr '[:lower:]' '[:upper:]' `
 
-
-
+# firewall-cmd --get-services
+firewall-cmd --permanent --add-service=samba
+firewall-cmd --permanent --add-service=samba-client
+firewall-cmd --permanent --add-service=rpc-bind
+systemctl restart firewalld
 
 
 yum install -y samba-winbind-clients samba-winbind-krb5-locator   sssd  sssd-client adcli cifs-utils krb5-devel krb5-workstation  libcgroup-pam mod_authnz_pam  nscd  nss-pam-ldapd  ntp  ntpdate   oddjob   oddjob-mkhomedir pam_krb5  base   pam_ssh_agent_auth realmd samba samba-common samba-winbind 
@@ -135,8 +138,31 @@ authconfig --enablesssd --enablesssdauth --enablemkhomedir --update
 
 systemctl enable winbind
 systemctl restart winbind
+echo "$var_password"  | net ads join -U $var_admin
+sleep 4
+echo "$var_password"  | net ads join -U $var_admin
+sleep 4
+echo "$var_password"  | net rpc join -U $var_admin
+sleep 4 
+echo "$var_password"  | net rpc join -U $var_admin
 
+systemctl restart winbind
 
 
 echo "%$var_netbios\\$var_sudoers_group_admin ALL=(ALL) ALL" >  /etc/sudoers.d/windows_group_admin
 echo "%$var_sudoers_group_admin@$var_domain ALL=(ALL) ALL" >>  /etc/sudoers.d/windows_group_admin
+
+echo ""
+echo ""
+echo ""
+echo "********************************************************"
+echo "       TESTES"
+echo "net ads testjoin -U "
+echo "net rpc trustdom list -U $var_admin"
+echo "net ads user   -U $var_admin"
+echo "net ads group  -U $var_admin"
+echo "wbinfo -D var_netbios"
+echo "wbinfo -t"
+echo "wbinfo -u"
+echo "wbinfo -g"
+
